@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Compras</title>
+<meta name="description" content="Lista de compras da semana para usar no celular durante o mercado.">
+<meta name="theme-color" content="#2f6b4f">
+<style>
+  :root {
+    --bg: #f7f6f2; --surface: #fff; --surface-2: #f0eee7; --text: #1f2421; --muted: #5d655f;
+    --border: #dcd8cc; --accent: #2f6b4f; --accent-soft: #e2efe7; --warn: #8a5a00; --warn-soft: #fbf0d9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141715; --surface: #1c201d; --surface-2: #242925; --text: #e8ebe8; --muted: #a3aba5;
+      --border: #343a36; --accent: #7cc59f; --accent-soft: #20352a; --warn: #f0c46b; --warn-soft: #3a2f17;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141715; --surface: #1c201d; --surface-2: #242925; --text: #e8ebe8; --muted: #a3aba5;
+    --border: #343a36; --accent: #7cc59f; --accent-soft: #20352a; --warn: #f0c46b; --warn-soft: #3a2f17;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 16px 80px; }
+
+  header { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--border); }
+  header .wrap { padding-top: 12px; padding-bottom: 10px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  h1 { font-size: 1.3rem; margin: 0; }
+  .sub { color: var(--muted); font-size: .85rem; margin-top: 2px; }
+  .progress { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; margin-top: 10px; }
+  .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+  .controls { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  button, .btn { font: inherit; font-size: .85rem; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    padding: 7px 12px; border-radius: 999px; cursor: pointer; text-decoration: none; }
+  button[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+  h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 22px 0 8px; display: flex; justify-content: space-between; }
+  ul { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  li { border-bottom: 1px solid var(--border); }
+  li:last-child { border-bottom: 0; }
+  label { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; padding: 13px 14px; cursor: pointer; min-height: 56px; }
+  input[type=checkbox] { width: 24px; height: 24px; margin: 0; accent-color: var(--accent); }
+  .name { font-weight: 600; }
+  .qty { display: block; color: var(--muted); font-size: .85rem; font-weight: 400; }
+  .price { color: var(--muted); font-size: .85rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  li.done .name { text-decoration: line-through; color: var(--muted); }
+  li.done { background: var(--surface-2); }
+  body.hide-done li.done { display: none; }
+
+  .note { background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; padding: 10px 12px; margin-top: 16px; font-size: .9rem; }
+  .note.warn { background: var(--warn-soft); border-color: var(--warn); }
+  .note p { margin: 0 0 6px; } .note p:last-child { margin: 0; }
+  .total { display: flex; justify-content: space-between; font-weight: 700; margin-top: 18px; font-variant-numeric: tabular-nums; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Lista de compras</h1>
+        <div class="sub" id="semana"></div>
+      </div>
+      <a class="btn" href="index.html">Plano</a>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+    <div class="controls">
+      <span class="sub" id="count" style="align-self:center;flex:1"></span>
+      <button id="hide" aria-pressed="false">Ocultar pegos</button>
+      <button id="reset">Limpar</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="lista"></main>
+
+<script>
+  // Edite aqui a lista da semana. "id" deve ser único; mudar "semana" zera as marcações.
+  var SEMANA = '2026-10-20';
+  var LISTA = [
+    { cat: 'Proteínas', itens: [
+      { id: 'frango',   nome: 'Peito de frango',          qtd: '2,5 kg · filé congelado em pacote, se tiver', preco: 55 },
+      { id: 'moida',    nome: 'Carne moída patinho/acém', qtd: '1,5 kg', preco: 57 },
+      { id: 'ovos',     nome: 'Ovos',                     qtd: '~40 · 1 bandeja de 30 + 1 dúzia', preco: 30 }
+    ]},
+    { cat: 'Laticínios e padaria', itens: [
+      { id: 'leite',    nome: 'Leite desnatado ou semi',  qtd: '7 L', preco: 37 },
+      { id: 'iogurte',  nome: 'Iogurte natural',          qtd: '1 pote grande ou 6 un · não o grego adoçado', preco: 14 },
+      { id: 'pao',      nome: 'Pão de forma integral',    qtd: '2 pacotes · congelar 1', preco: 16 },
+      { id: 'queijo',   nome: 'Queijo ralado',            qtd: '50 g · opcional', preco: 5 }
+    ]},
+    { cat: 'Hortifruti', itens: [
+      { id: 'batata',   nome: 'Batata',                   qtd: '3 kg', preco: 15 },
+      { id: 'tomate',   nome: 'Tomate',                   qtd: '1,5 kg · metade maduro, metade firme', preco: 9 },
+      { id: 'brocolis', nome: 'Brócolis fresco',          qtd: '2 maços', preco: 10 },
+      { id: 'brocolisc',nome: 'Brócolis congelado',       qtd: '1 pacote de 1 kg', preco: 18 },
+      { id: 'cenoura',  nome: 'Cenoura',                  qtd: '1 kg', preco: 5 },
+      { id: 'cebola',   nome: 'Cebola',                   qtd: '1 kg', preco: 5 },
+      { id: 'abobrinha',nome: 'Abobrinha e chuchu',       qtd: '1,5 kg', preco: 8 },
+      { id: 'repolho',  nome: 'Repolho',                  qtd: '½ unidade', preco: 4 },
+      { id: 'banana',   nome: 'Banana',                   qtd: '1,5 kg', preco: 8 },
+      { id: 'frutas',   nome: 'Maçã e laranja',           qtd: '3 kg', preco: 15 },
+      { id: 'temperos-frescos', nome: 'Alho, limão, cheiro-verde', qtd: '2 cabeças · 4 limões · 1 maço', preco: 8 }
+    ]},
+    { cat: 'Despensa (dura o mês)', itens: [
+      { id: 'arroz',    nome: 'Arroz',                    qtd: '5 kg', preco: 25 },
+      { id: 'feijao',   nome: 'Feijão',                   qtd: '1 kg', preco: 8 },
+      { id: 'oleo',     nome: 'Óleo',                     qtd: '1 L', preco: 9 },
+      { id: 'cafe',     nome: 'Café',                     qtd: '500 g', preco: 30 },
+      { id: 'sal',      nome: 'Sal',                      qtd: '1 kg', preco: 3 },
+      { id: 'molho',    nome: 'Molho/extrato de tomate',  qtd: '2 un · se o anterior acabou', preco: 8 },
+      { id: 'temperos', nome: 'Temperos secos',           qtd: 'colorau/páprica, louro, orégano', preco: 12 }
+    ]}
+  ];
+
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  var brl = function (v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }); };
+  var key = function (id) { return 'compra:' + SEMANA + ':' + id; };
+  var p = SEMANA.split('-');
+  document.getElementById('semana').textContent = 'Semana de ' + p[2] + '/' + p[1] + ' · marcações salvas neste celular';
+
+  var main = document.getElementById('lista');
+  var html = '';
+  var all = [];
+  var totalEst = 0;
+  LISTA.forEach(function (g) {
+    var sub = g.itens.reduce(function (a, it) { return a + it.preco; }, 0);
+    totalEst += sub;
+    html += '<h2><span>' + g.cat + '</span><span>~' + brl(sub) + '</span></h2><ul>';
+    g.itens.forEach(function (it) {
+      all.push(it);
+      html += '<li id="li-' + it.id + '"><label><input type="checkbox" data-id="' + it.id + '">' +
+        '<span><span class="name">' + it.nome + '</span><span class="qty">' + it.qtd + '</span></span>' +
+        '<span class="price">~' + brl(it.preco) + '</span></label></li>';
+    });
+    html += '</ul>';
+  });
+  html += '<div class="total"><span>Total estimado</span><span>~' + brl(totalEst) + '</span></div>' +
+    '<div class="note warn"><p><strong>Deixar fora:</strong> creme de leite, refrigerante e iogurte grego adoçado.</p></div>' +
+    '<div class="note"><p><strong>Batata, tomate e cenoura</strong> custam R$ 3,99/kg no Sacolão da Família. Na terça tem a feira do Novo Mundo, das 16h às 20h.</p>' +
+    '<p>Depois da compra, mandem o link do QR Code da nota para registrar os preços.</p></div>';
+  main.innerHTML = html;
+
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[data-id]'));
+  function refresh() {
+    var done = 0;
+    boxes.forEach(function (b) {
+      document.getElementById('li-' + b.dataset.id).classList.toggle('done', b.checked);
+      if (b.checked) done++;
+    });
+    document.getElementById('count').textContent = done + ' de ' + boxes.length + ' itens';
+    document.getElementById('bar').style.width = (done / boxes.length * 100) + '%';
+  }
+  boxes.forEach(function (b) {
+    b.checked = store.get(key(b.dataset.id)) === '1';
+    b.addEventListener('change', function () { store.set(key(b.dataset.id), b.checked ? '1' : '0'); refresh(); });
+  });
+  var hideBtn = document.getElementById('hide');
+  function setHide(on) { document.body.classList.toggle('hide-done', on); hideBtn.setAttribute('aria-pressed', on); store.set('compra:ocultar', on ? '1' : '0'); }
+  hideBtn.addEventListener('click', function () { setHide(!document.body.classList.contains('hide-done')); });
+  setHide(store.get('compra:ocultar') === '1');
+  document.getElementById('reset').addEventListener('click', function () {
+    if (!confirm('Desmarcar todos os itens?')) return;
+    boxes.forEach(function (b) { b.checked = false; store.set(key(b.dataset.id), '0'); });
+    refresh();
+  });
+  refresh();
+</script>
+</body>
+</html>

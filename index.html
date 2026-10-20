@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plano Alimentar do Casal</title>
+<meta name="description" content="Plano alimentar para emagrecimento com baixo custo: metas, cardápio semanal, marmitas, lista de compras e mercados na região do Novo Mundo, Curitiba.">
+<meta name="theme-color" content="#2f6b4f">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --surface-2: #f0eee7;
+    --text: #1f2421;
+    --muted: #5d655f;
+    --border: #dcd8cc;
+    --accent: #2f6b4f;
+    --accent-soft: #e2efe7;
+    --warn: #8a5a00;
+    --warn-soft: #fbf0d9;
+    --ele: #2b5d8a;
+    --ele-soft: #e3edf6;
+    --ela: #8a3b62;
+    --ela-soft: #f6e5ee;
+    --veg: #3f8a4a;
+    --prot: #b5543a;
+    --carb: #c9962b;
+    --radius: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141715;
+      --surface: #1c201d;
+      --surface-2: #242925;
+      --text: #e8ebe8;
+      --muted: #a3aba5;
+      --border: #343a36;
+      --accent: #7cc59f;
+      --accent-soft: #20352a;
+      --warn: #f0c46b;
+      --warn-soft: #3a2f17;
+      --ele: #8dbbe6;
+      --ele-soft: #1d2b39;
+      --ela: #e59cc1;
+      --ela-soft: #3a2230;
+      --veg: #7cc58a;
+      --prot: #e8876d;
+      --carb: #e6bd5f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141715; --surface: #1c201d; --surface-2: #242925; --text: #e8ebe8; --muted: #a3aba5;
+    --border: #343a36; --accent: #7cc59f; --accent-soft: #20352a; --warn: #f0c46b; --warn-soft: #3a2f17;
+    --ele: #8dbbe6; --ele-soft: #1d2b39; --ela: #e59cc1; --ela-soft: #3a2230;
+    --veg: #7cc58a; --prot: #e8876d; --carb: #e6bd5f;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: var(--accent); }
+  h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
+  h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); letter-spacing: -.02em; }
+  h2 { font-size: 1.45rem; letter-spacing: -.01em; }
+  h3 { font-size: 1.08rem; }
+  p { margin: 0 0 .8em; }
+  ul, ol { margin: 0 0 .8em; padding-left: 1.3em; }
+  li { margin: .2em 0; }
+  small, .muted { color: var(--muted); }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+
+  header.hero { padding: 36px 0 20px; }
+  .hero .kicker { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .hero p { color: var(--muted); max-width: 62ch; }
+  .hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+  button, .btn {
+    font: inherit; font-size: .9rem; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    padding: 8px 14px; border-radius: 999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  }
+  button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+  button:hover, .btn:hover { filter: brightness(.97); }
+
+  nav.toc {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+  nav.toc .wrap::-webkit-scrollbar { display: none; }
+  nav.toc a {
+    flex: none; text-decoration: none; color: var(--text); font-size: .85rem;
+    padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); white-space: nowrap;
+  }
+  nav.toc a:hover { border-color: var(--accent); color: var(--accent); }
+
+  section { padding: 28px 0 8px; }
+  section > .wrap > h2 { display: flex; align-items: baseline; gap: 10px; }
+  section > .wrap > h2 .num { color: var(--accent); font-size: .95rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .lead { color: var(--muted); max-width: 70ch; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 14px; }
+  .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); }
+
+  .person { border-top: 4px solid var(--c); }
+  .person.ele { --c: var(--ele); --cs: var(--ele-soft); }
+  .person.ela { --c: var(--ela); --cs: var(--ela-soft); }
+  .person h3 { color: var(--c); display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .person h3 small { font-weight: 400; font-size: .85rem; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+  .stat { background: var(--cs, var(--surface-2)); border-radius: 10px; padding: 10px 12px; }
+  .stat .v { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.15; }
+  .stat .l { font-size: .78rem; color: var(--muted); }
+
+  .callout { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 12px 14px; border-radius: 0 10px 10px 0; margin: 12px 0; }
+  .callout.warn { border-color: var(--warn); background: var(--warn-soft); }
+  .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: 14px; }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  thead th { background: var(--surface-2); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tag { display: inline-block; font-size: .72rem; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .tag.ele { background: var(--ele-soft); color: var(--ele); }
+  .tag.ela { background: var(--ela-soft); color: var(--ela); }
+  .tag.ok { background: var(--accent-soft); color: var(--accent); }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+
+  /* Prato */
+  .plate-row { display: grid; grid-template-columns: 200px 1fr; gap: 20px; align-items: center; }
+  @media (max-width: 560px) { .plate-row { grid-template-columns: 1fr; justify-items: center; } }
+  .plate { width: 190px; height: 190px; border-radius: 50%; position: relative;
+    background: conic-gradient(var(--veg) 0 50%, var(--prot) 50% 75%, var(--carb) 75% 100%);
+    box-shadow: 0 0 0 10px var(--surface), 0 0 0 11px var(--border); }
+  .plate span { position: absolute; color: #fff; font-weight: 700; font-size: .8rem; text-shadow: 0 1px 2px rgba(0,0,0,.35); text-align: center; line-height: 1.15; }
+  .legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+  /* Cardápio */
+  .menu td:first-child { font-weight: 700; white-space: nowrap; }
+  .menu td .prep { display: block; font-size: .78rem; color: var(--accent); font-weight: 600; margin-top: 2px; }
+
+  /* Timeline */
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li { display: grid; grid-template-columns: 58px 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--border); }
+  .timeline li:last-child { border-bottom: 0; }
+  .timeline .t { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  /* Receitas */
+  details.recipe { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; }
+  details.recipe summary { cursor: pointer; padding: 14px 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+  details.recipe summary::-webkit-details-marker { display: none; }
+  details.recipe summary::after { content: "+"; font-size: 1.3rem; color: var(--muted); line-height: 1; }
+  details.recipe[open] summary::after { content: "–"; }
+  details.recipe .body { padding: 0 16px 14px; }
+  details.recipe .meta { font-weight: 400; font-size: .8rem; color: var(--muted); margin-left: auto; margin-right: 8px; white-space: nowrap; }
+
+  /* Mercados */
+  .store { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .store:last-child { border-bottom: 0; }
+  .store .name { font-weight: 600; }
+  .store .dist { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent); text-align: right; white-space: nowrap; }
+  .store .addr { grid-column: 1 / -1; font-size: .86rem; color: var(--muted); }
+  .store .addr a { font-size: .82rem; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li { display: grid; grid-template-columns: 26px 1fr auto; gap: 8px; align-items: start; padding: 8px 0; border-bottom: 1px solid var(--border); margin: 0; }
+  .checklist li:last-child { border-bottom: 0; }
+  .checklist input[type=checkbox] { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent); }
+  .checklist label { cursor: pointer; }
+  .checklist .qty { color: var(--muted); font-size: .85rem; display: block; }
+  .checklist .price { font-variant-numeric: tabular-nums; font-size: .85rem; color: var(--muted); white-space: nowrap; text-align: right; }
+  .checklist input:checked + label { text-decoration: line-through; color: var(--muted); }
+  .list-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+
+  /* Tracker */
+  .tracker input { width: 100%; min-width: 64px; font: inherit; font-size: .9rem; padding: 6px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); }
+  .tracker td { padding: 6px 8px; }
+
+  /* Preços reais */
+  .bar-row { display: grid; grid-template-columns: 96px 1fr 88px; gap: 10px; align-items: center; padding: 5px 0; font-size: .9rem; }
+  .bar { height: 12px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+  .bar.budget { height: 16px; }
+  .bar-row .val { text-align: right; font-variant-numeric: tabular-nums; }
+  .diff-up { color: var(--prot); font-weight: 600; }
+  .diff-ok { color: var(--accent); font-weight: 600; }
+  .bar > i, .tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  footer { padding: 30px 0 50px; color: var(--muted); font-size: .85rem; }
+  footer ol { padding-left: 1.2em; }
+  footer li { word-break: break-word; }
+
+  .print-only { display: none; }
+
+  /* ---------- IMPRESSÃO ---------- */
+  @media print {
+    :root, :root[data-theme="dark"] {
+      --bg: #fff; --surface: #fff; --surface-2: #f1f1ee; --text: #111; --muted: #555; --border: #ccc;
+      --accent: #2f6b4f; --accent-soft: #eef5f0; --warn: #7a4f00; --warn-soft: #fbf3e2;
+      --ele: #2b5d8a; --ele-soft: #eaf1f8; --ela: #8a3b62; --ela-soft: #f8edf3;
+      --veg: #3f8a4a; --prot: #b5543a; --carb: #c9962b;
+    }
+    @page { size: A4; margin: 14mm 12mm; }
+    body { font-size: 10.5pt; background: #fff; }
+    nav.toc, .hero-actions, .no-print, button { display: none !important; }
+    .print-only { display: block; }
+    .wrap { max-width: none; padding: 0; }
+    header.hero { padding: 0 0 8px; }
+    section { padding: 10px 0 0; }
+    section.page { break-before: page; }
+    .card, .table-wrap, .store, details.recipe, .timeline li, .callout, tr { break-inside: avoid; }
+    h2, h3 { break-after: avoid; }
+    .table-wrap { overflow: visible; }
+    details.recipe .body { display: block !important; }
+    details.recipe summary::after { content: ""; }
+    a { color: inherit; text-decoration: none; }
+    .plate { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .stat, .tag, thead th, .callout, .legend-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .checklist input[type=checkbox] { appearance: none; -webkit-appearance: none; border: 1.5px solid #555; border-radius: 3px; }
+    .checklist input:checked + label { text-decoration: none; color: inherit; }
+    .tracker input { border: 0; border-bottom: 1px solid #999; border-radius: 0; background: transparent; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Novo Mundo · Curitiba · out/2026</div>
+    <h1>Plano alimentar do casal</h1>
+    <p>Para emagrecer com saúde gastando pouco, com 1 a 2 idas ao mercado por semana. Tem marmitas para ele levar ao trabalho e uma reserva congelada para os dias corridos dela.</p>
+    <div class="hero-actions">
+      <button class="primary" onclick="window.print()">Imprimir / salvar PDF</button>
+      <a class="btn" href="lista.html">Lista da semana (celular)</a>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Seções">
+  <div class="wrap">
+    <a href="#metas">Metas</a>
+    <a href="#prato">Prato</a>
+    <a href="#porcoes">Porções</a>
+    <a href="#cardapio">Cardápio</a>
+    <a href="#preparo">Preparo</a>
+    <a href="#receitas">Receitas</a>
+    <a href="#mercados">Onde comprar</a>
+    <a href="#compras">Lista de compras</a>
+    <a href="#precos">Preços reais</a>
+    <a href="#orcamento">Orçamento</a>
+    <a href="#trocas">Trocas</a>
+    <a href="#acompanhamento">Acompanhamento</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- 1. METAS -->
+<section id="metas">
+  <div class="wrap">
+    <h2><span class="num">01</span> Metas diárias</h2>
+    <p class="lead">Os números vêm da fórmula de Mifflin-St Jeor considerando nenhuma atividade física, com um déficit moderado de calorias. É um ponto de partida: ajustem pela balança a cada 2–3 semanas.</p>
+    <div class="grid g2">
+      <div class="card person ele">
+        <h3>Ele <small>1,80 m · 96 kg · 30 anos · IMC 29,6</small></h3>
+        <div class="stats">
+          <div class="stat"><div class="v">1.800–1.900</div><div class="l">kcal por dia</div></div>
+          <div class="stat"><div class="v">130–150 g</div><div class="l">proteína por dia</div></div>
+          <div class="stat"><div class="v">~3 L</div><div class="l">água por dia</div></div>
+          <div class="stat"><div class="v">0,5–0,8 kg</div><div class="l">perda esperada por semana</div></div>
+        </div>
+      </div>
+      <div class="card person ela">
+        <h3>Ela <small>1,60 m · 66 kg · 27 anos · IMC 25,8</small></h3>
+        <div class="stats">
+          <div class="stat"><div class="v">1.300–1.400</div><div class="l">kcal por dia</div></div>
+          <div class="stat"><div class="v">90–110 g</div><div class="l">proteína por dia</div></div>
+          <div class="stat"><div class="v">~2,3 L</div><div class="l">água por dia</div></div>
+          <div class="stat"><div class="v">0,3–0,5 kg</div><div class="l">perda esperada por semana</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <p><strong>Os 5 combinados que mais fazem diferença</strong></p>
+      <ul>
+        <li><strong>Mesma comida, porções diferentes.</strong> Uma panela só serve os dois.</li>
+        <li><strong>Proteína em toda refeição</strong>, porque dá saciedade e preserva músculo.</li>
+        <li><strong>Óleo medido:</strong> 1 colher de sopa por panela. É onde mais se escondem calorias.</li>
+        <li><strong>Bebidas sem açúcar.</strong> Café puro ou com leite, e nada de refrigerante ou suco de caixinha.</li>
+        <li><strong>1 refeição livre por semana</strong> (sábado à noite), com moderação e sem culpa.</li>
+      </ul>
+    </div>
+    <div class="callout warn">
+      <p><strong>Quando começarem a academia:</strong> nos dias de treino ele soma ~200 kcal (por exemplo +1 banana e +200 ml de leite) e ela soma ~150 kcal (por exemplo +1 iogurte natural ou +1 fruta). Não reduzam a proteína.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PRATO -->
+<section id="prato">
+  <div class="wrap">
+    <h2><span class="num">02</span> Montagem do prato</h2>
+    <div class="card">
+      <div class="plate-row">
+        <div class="plate" role="img" aria-label="Prato: metade legumes, um quarto proteína, um quarto carboidrato">
+          <span style="right:22px;top:72px">Legumes<br>½</span>
+          <span style="left:34px;top:120px">Proteína<br>¼</span>
+          <span style="left:34px;top:38px">Carbo<br>¼</span>
+        </div>
+        <div>
+          <p><span class="legend-dot" style="background:var(--veg)"></span><strong>Metade: legumes e salada.</strong> Brócolis, tomate, cenoura, abobrinha, chuchu, repolho. Pode repetir à vontade.</p>
+          <p><span class="legend-dot" style="background:var(--prot)"></span><strong>Um quarto: proteína.</strong> Peito de frango, carne moída, ovos.</p>
+          <p><span class="legend-dot" style="background:var(--carb)"></span><strong>Um quarto: carboidrato.</strong> Arroz com feijão, ou batata.</p>
+          <p class="muted" style="margin:0">Na mesma refeição, escolham arroz <em>ou</em> batata. Se quiserem os dois, dividam a porção ao meio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PORÇÕES -->
+<section id="porcoes" class="page">
+  <div class="wrap">
+    <h2><span class="num">03</span> Porções de cada um</h2>
+    <p class="lead">Pesos de alimento <strong>já cozido</strong>. Pesem na balança de cozinha (custa uns R$ 25) durante as primeiras 2 semanas. Depois disso já dá para acertar no olho.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Refeição</th><th><span class="tag ele">Ele · ~1.850 kcal</span></th><th><span class="tag ela">Ela · ~1.350 kcal</span></th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Café da manhã</strong><br><small>~7h</small></td>
+            <td>2 fatias de pão de forma integral<br>2 ovos mexidos (sem óleo, em frigideira antiaderente)<br>Café com 200 ml de leite semidesnatado<br>1 banana</td>
+            <td>1 fatia de pão de forma integral<br>2 ovos mexidos<br>Café com 150 ml de leite semidesnatado<br>1 fruta</td>
+          </tr>
+          <tr>
+            <td><strong>Almoço</strong><br><small>marmita</small></td>
+            <td>Arroz 120 g (≈ 5 col. sopa)<br>Feijão 1 concha (100 g)<br>Frango 150 g <em>ou</em> carne moída 130 g<br>Legumes 150 g ou mais</td>
+            <td>Arroz 80 g (≈ 3 col. sopa)<br>Feijão ¾ de concha (80 g)<br>Frango 110 g <em>ou</em> carne moída 100 g<br>Legumes 150 g ou mais</td>
+          </tr>
+          <tr>
+            <td><strong>Lanche</strong><br><small>~16h</small></td>
+            <td>300 ml de leite (com café, se quiser) + 1 fruta</td>
+            <td>1 iogurte natural (170 g) + 1 fruta</td>
+          </tr>
+          <tr>
+            <td><strong>Jantar</strong><br><small>~20h</small></td>
+            <td>Batata 200 g <em>ou</em> arroz 100 g<br>Carne moída 130 g <em>ou</em> frango 150 g<br>Salada de tomate à vontade<br>Feijão ½ concha (opcional)</td>
+            <td>Batata 130 g <em>ou</em> arroz 70 g<br>Carne moída 100 g <em>ou</em> frango 110 g<br>Salada de tomate à vontade<br>Feijão ½ concha (opcional)</td>
+          </tr>
+          <tr>
+            <td><strong>Total aproximado</strong></td>
+            <td>~1.800–1.850 kcal · ~135 g proteína</td>
+            <td>~1.330–1.380 kcal · ~105 g proteína</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Leite, café e pão (o que muda)</h3>
+        <ul>
+          <li><strong>Leite:</strong> troquem pelo semidesnatado. Ele fica em até ~500 ml/dia, que já está no plano. O leite conta como proteína, então ele entra, só que medido.</li>
+          <li><strong>Café:</strong> à vontade, <strong>sem açúcar</strong>. Se precisar, usem adoçante por algumas semanas até acostumar.</li>
+          <li><strong>Pão fatiado:</strong> o integral sacia mais. No rótulo, a <em>farinha de trigo integral</em> tem que ser o 1º ingrediente. Congelem metade do pacote para não mofar entre uma compra e outra.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kit 5 minutos (dias corridos dela)</h3>
+        <ul>
+          <li>Marmita da <strong>reserva congelada</strong>: 4–6 min no micro-ondas.</li>
+          <li>Ou <strong>omelete</strong>: 2 ovos com frango desfiado e tomate, mais 1 fatia de pão.</li>
+          <li>Ou <strong>sanduíche</strong>: 2 fatias de pão integral, 100 g de frango desfiado, tomate e 1 iogurte.</li>
+          <li>Sempre deixem na geladeira <strong>4 ovos cozidos</strong> e um <strong>pote de frango desfiado</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CARDÁPIO -->
+<section id="cardapio" class="page">
+  <div class="wrap">
+    <h2><span class="num">04</span> Cardápio da semana</h2>
+    <p class="lead">O café da manhã e o lanche são os mesmos todo dia (veja as porções). O cardápio é repetitivo de propósito: assim dá para cozinhar em lote e comprar em quantidade, que é onde vem a economia.</p>
+    <div class="table-wrap menu">
+      <table>
+        <thead><tr><th>Dia</th><th>Almoço (marmita)</th><th>Jantar</th></tr></thead>
+        <tbody>
+          <tr><td>Seg</td><td>Frango assado em tiras · arroz · feijão · brócolis</td><td>Carne moída com legumes · batata cozida · salada de tomate</td></tr>
+          <tr><td>Ter</td><td>Carne moída com legumes · arroz · feijão · cenoura</td><td>Omelete de frango desfiado e tomate · 1 fatia de pão · salada</td></tr>
+          <tr><td>Qua</td><td>Frango desfiado ao molho de tomate · arroz · feijão · brócolis</td><td>Sopa de legumes com frango<span class="prep">Preparo de quarta</span></td></tr>
+          <tr><td>Qui</td><td>Escondidinho de batata com carne moída · brócolis</td><td>Frango em cubos salteado com legumes · arroz</td></tr>
+          <tr><td>Sex</td><td>Frango em cubos · arroz · feijão · legumes assados</td><td>Escondidinho de batata com carne moída · salada de tomate</td></tr>
+          <tr><td>Sáb</td><td>Rápido: arroz · feijão · 2–3 ovos · salada<span class="prep">Dia de compras</span></td><td><strong>Refeição livre</strong>, com moderação</td></tr>
+          <tr><td>Dom</td><td>Frango assado · batata assada · brócolis · tomate<span class="prep">Preparo de domingo</span></td><td>Sanduíche de pão integral com frango desfiado e tomate</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <p><strong>Para variar sem gastar mais:</strong> 1x por semana troquem a proteína por <em>sobrecoxa sem pele</em>, <em>pernil suíno</em>, <em>sardinha em lata</em> ou <em>ovos</em>. No lugar do feijão, de vez em quando, usem <em>lentilha</em>. A carne moída também rende <em>molho à bolonhesa</em> com macarrão (porção igual à do arroz) e <em>batata recheada</em>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PREPARO -->
+<section id="preparo" class="page">
+  <div class="wrap">
+    <h2><span class="num">05</span> Rotina de preparo</h2>
+    <p class="lead">São duas sessões por semana. O domingo cobre de segunda a quarta e monta a reserva congelada dela. A quarta cobre quinta e sexta.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Domingo · ~2h</h3>
+        <p class="muted">Sábado à noite: deixem 500 g de feijão de molho.</p>
+        <ol class="timeline">
+          <li><span class="t">0:00</span><span>Feijão na pressão. Forno pré-aquecendo a 220 °C.</span></li>
+          <li><span class="t">0:10</span><span>Cortem 1 kg de batata e os legumes. Assadeira no forno por 40 min.</span></li>
+          <li><span class="t">0:15</span><span>Temperem 1 kg de peito em tiras (assar) e separem 800 g para desfiar.</span></li>
+          <li><span class="t">0:30</span><span>Arroz: 2 xícaras de arroz cru (rende ~8 porções).</span></li>
+          <li><span class="t">0:40</span><span>Feijão pronto: refoguem. Na mesma panela de pressão, cozinhem os 800 g de frango (15 min).</span></li>
+          <li><span class="t">0:45</span><span>Carne moída com legumes: 1 kg.</span></li>
+          <li><span class="t">1:00</span><span>Frango em tiras no forno (20–25 min) ou na frigideira.</span></li>
+          <li><span class="t">1:20</span><span>Brócolis: 2 min em água fervente e depois água gelada.</span></li>
+          <li><span class="t">1:30</span><span>Desfiem o frango e <strong>montem as marmitas</strong>. Porcionem o feijão.</span></li>
+          <li><span class="t">1:50</span><span>Etiquetem com a data e lavem a louça.</span></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Quarta à noite · ~50 min</h3>
+        <ol class="timeline">
+          <li><span class="t">0:00</span><span>Cozinhem 1,2 kg de batata para o purê.</span></li>
+          <li><span class="t">0:05</span><span>Mais 500 g de carne moída com legumes, ou usem o que sobrou do domingo.</span></li>
+          <li><span class="t">0:10</span><span>Arroz fresco (1½ xícara).</span></li>
+          <li><span class="t">0:20</span><span>Frango em cubos (700 g) salteado com legumes.</span></li>
+          <li><span class="t">0:25</span><span>Sopa de legumes com o frango desfiado que sobrou (jantar de quarta).</span></li>
+          <li><span class="t">0:30</span><span>Montem o escondidinho e levem ao forno por 15 min.</span></li>
+          <li><span class="t">0:45</span><span>Marmitas de quinta e sexta. Reponham a reserva dela.</span></li>
+        </ol>
+        <h3 style="margin-top:14px">Quantas marmitas</h3>
+        <table>
+          <tbody>
+            <tr><td>Domingo</td><td>3 dele (seg–qua) + <strong>3–4 de reserva para ela</strong> (congelador)</td></tr>
+            <tr><td>Quarta</td><td>2 dele (qui–sex) + repor o que ela usou</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card"><h3>Geladeira</h3><p style="margin:0">Até <strong>3 dias</strong>. Esfriem as marmitas antes de tampar e guardem em no máximo 1h depois de prontas.</p></div>
+      <div class="card"><h3>Congelador</h3><p style="margin:0">Até <strong>1 mês</strong>. Descongelem na geladeira na véspera. Batata cozida inteira fica aguada, mas purê e escondidinho congelam bem.</p></div>
+      <div class="card"><h3>Potes</h3><p style="margin:0">Comprem <strong>10–12 potes de vidro</strong> que vão ao micro-ondas, de ~650 ml para ele e ~500 ml para ela. É um gasto único.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. RECEITAS -->
+<section id="receitas" class="page">
+  <div class="wrap">
+    <h2><span class="num">06</span> Receitas base</h2>
+    <p class="lead">Todas usam o mesmo tempero base: <strong>cebola, alho, sal, limão, páprica/colorau e cheiro-verde</strong>. Nada de caldo em cubo nem tempero pronto de pacote, que têm muito sódio.</p>
+
+    <details class="recipe" open><summary>Feijão da semana <span class="meta">~10 conchas</span></summary><div class="body">
+      <ul><li>500 g de feijão (carioca ou preto), de molho de 8 a 12h. Descartem a água do molho.</li>
+      <li>Pressão com 1,5 L de água e 2 folhas de louro: 25–30 min depois de começar a chiar.</li>
+      <li>Refoguem 1 cebola e 3 dentes de alho em 1 col. (sopa) de óleo, juntem 2 conchas de feijão amassado e devolvam à panela. Sal a gosto.</li>
+      <li><strong>Congelem metade</strong> em potes de 4 conchas.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Arroz <span class="meta">~8 porções</span></summary><div class="body">
+      <ul><li>2 xícaras de arroz cru, 4 xícaras de água quente, 1 col. (chá) de óleo, 2 dentes de alho e sal.</li>
+      <li>Para render mais e baratear, misturem 1 cenoura ralada.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Frango assado em tiras <span class="meta">~6 porções</span></summary><div class="body">
+      <ul><li>1 kg de filé de peito em tiras. Temperem com suco de 1 limão, 3 dentes de alho amassados, sal, páprica, orégano e pimenta (pode ser na véspera).</li>
+      <li>Assadeira untada com 1 col. (chá) de óleo, a 220 °C por 20–25 min, virando na metade. <strong>Não passem do ponto</strong>, senão o peito seca.</li>
+      <li>Sem forno: frigideira antiaderente bem quente, 3–4 min de cada lado.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Frango desfiado <span class="meta">~6 porções</span></summary><div class="body">
+      <ul><li>800 g de peito na pressão com água até cobrir, ½ cebola, louro e sal, por 15 min.</li>
+      <li>Desfiem com 2 garfos. Refoguem com cebola, 2 tomates picados e cheiro-verde.</li>
+      <li>Serve para marmita, sanduíche, omelete, sopa e para o kit 5 minutos.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Carne moída com legumes <span class="meta">~8 porções</span></summary><div class="body">
+      <ul><li>1 kg de patinho ou acém moído, 1 cebola, 3 dentes de alho, 2 cenouras raladas, 1 abobrinha picada, 3 tomates e colorau.</li>
+      <li>Doure a carne <strong>sem óleo</strong> (ela solta a própria gordura). Juntem cebola e alho, depois os legumes e o tomate. Tampem e deixem 15 min em fogo baixo.</li>
+      <li>Os legumes aumentam o volume, deixam mais nutritivo e baixam o custo por porção.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Escondidinho de batata com carne moída <span class="meta">6 porções</span></summary><div class="body">
+      <ul><li>1,2 kg de batata cozida e amassada com 150 ml de leite, sal e noz-moscada (sem manteiga, ou no máximo 1 col.).</li>
+      <li>Em um refratário: metade do purê, ~600 g da carne moída com legumes e o resto do purê por cima.</li>
+      <li>Opcional: 50 g de queijo ralado por cima. Forno por 15 min. Cortem em 6 e montem as marmitas com brócolis do lado.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Batata e legumes assados <span class="meta">~6 porções</span></summary><div class="body">
+      <ul><li>1 kg de batata em cubos com casca, mais cenoura, abobrinha e chuchu. 1 col. (sopa) de óleo, sal, páprica e alecrim.</li>
+      <li>220 °C por 35–40 min, mexendo na metade. Na airfryer, 20–25 min.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Brócolis <span class="meta">acompanhamento</span></summary><div class="body">
+      <ul><li>Fresco: separem os buquês e deixem 2 min em água fervente, depois água gelada. Fica verde e firme por 3 dias.</li>
+      <li>Congelado: direto no micro-ondas ou no vapor. É ótimo para o fim da semana, quando o fresco já acabou.</li></ul>
+    </div></details>
+
+    <details class="recipe"><summary>Sopa de legumes com frango <span class="meta">4 porções</span></summary><div class="body">
+      <ul><li>2 batatas, 1 cenoura, 1 chuchu e 1 abobrinha em cubos, 1 cebola, 2 dentes de alho, 1,5 L de água e 300 g de frango desfiado.</li>
+      <li>Cozinhem 20 min. Bate bem nas noites frias de Curitiba e congela bem.</li></ul>
+    </div></details>
+  </div>
+</section>
+
+<!-- 7. MERCADOS -->
+<section id="mercados" class="page">
+  <div class="wrap">
+    <h2><span class="num">07</span> Onde comprar na região</h2>
+    <p class="lead">As distâncias são aproximadas e <strong>em linha reta</strong> a partir de casa, no Novo Mundo. A boa notícia é que perto do <strong>Terminal Pinheirinho</strong>, a ~2 km, há 3 atacarejos e 2 equipamentos da Prefeitura a poucos minutos um do outro. Dá para fazer quase tudo numa única saída.</p>
+
+    <div class="card">
+      <h3>Estratégia: 1 compra grande + 1 reposição opcional</h3>
+      <div class="grid g2" style="margin-top:8px">
+        <div>
+          <p><span class="tag ok">Compra principal · sábado de manhã</span></p>
+          <p><strong>Polo Pinheirinho.</strong> Comprem no atacarejo as carnes, os ovos, o leite, os secos e o pão. Depois, hortifruti no Sacolão da Família (R$ 3,99/kg). Se tiverem o cadastro, passem também no Armazém da Família.</p>
+        </div>
+        <div>
+          <p><span class="tag">Reposição · terça ou quarta (opcional)</span></p>
+          <p><strong>Feira do Novo Mundo</strong> (terça, 16h–20h) ou <strong>Sacolão Popular / mercado de bairro</strong>. Só tomate, frutas, brócolis fresco e pão. Leva 20 minutos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Atacarejos (compra grande)</h3>
+        <div class="store"><span class="name">Atacadão Pinheirinho</span><span class="dist">~1,9 km</span><span class="addr">Av. Winston Churchill, 1734 · <a href="https://www.google.com/maps/search/?api=1&query=Atacad%C3%A3o+Pinheirinho+Av.+Winston+Churchill+1734+Curitiba" target="_blank" rel="noopener">mapa</a></span></div>
+        <div class="store"><span class="name">Muffato Max Linha Verde</span><span class="dist">~2,2 km</span><span class="addr">R. Lothário Boutin, 554 · <a href="https://www.google.com/maps/search/?api=1&query=Muffato+Max+Linha+Verde+Curitiba" target="_blank" rel="noopener">mapa</a></span></div>
+        <div class="store"><span class="name">Assaí Atacadista Linha Verde</span><span class="dist">~2,5 km</span><span class="addr">Linha Verde (BR-116), 18580, ao lado do Terminal Pinheirinho · <a href="https://www.google.com/maps/search/?api=1&query=Assa%C3%AD+Atacadista+Linha+Verde+Pinheirinho+Curitiba" target="_blank" rel="noopener">mapa</a></span></div>
+        <div class="store"><span class="name">Superdia Atacado (Novo Mundo)</span><span class="dist">~1,7 km</span><span class="addr">R. Isaac Guelmann, 4134 (confirmar) · <a href="https://www.google.com/maps/search/?api=1&query=Superdia+Atacado+Novo+Mundo+Curitiba" target="_blank" rel="noopener">mapa</a></span></div>
+        <div class="store"><span class="name">Atacadão Fazendinha</span><span class="dist">~2,0 km</span><span class="addr">R. João Bettega, 2576 · <a href="https://www.google.com/maps/search/?api=1&query=Atacad%C3%A3o+Fazendinha+Jo%C3%A3o+Bettega+2576+Curitiba" target="_blank" rel="noopener">mapa</a></span></div>
+      </div>
+
+      <div class="card">
+        <h3>Prefeitura (mais barato)</h3>
+        <div class="store"><span class="name">Sacolão da Família Pinheirinho</span><span class="dist">~2,1 km</span><span class="addr">Terminal Pinheirinho · <strong>preço único R$ 3,99/kg</strong> em frutas, legumes e verduras · aberto a qualquer pessoa, sem cadastro · <a href="https://www.google.com/maps/search/?api=1&query=Sacol%C3%A3o+da+Fam%C3%ADlia+Terminal+Pinheirinho+Curitiba" target="_blank" rel="noopener">mapa</a></span></div>
+        <div class="store"><span class="name">Armazém da Família Capão Raso</span><span class="dist">~1,2 km</span><span class="addr">R. Otto Cabél, 51 · preços em média 30% menores · <strong>exige cadastro</strong>: renda familiar de até 5 salários mínimos (R$ 8.105 em 2026) · ter–sex 9h–18h, sáb 9h–14h · <a href="https://www.google.com/maps/search/?api=1&query=Armaz%C3%A9m+da+Fam%C3%ADlia+Capão+Raso+Rua+Otto+Cabél+51+Curitiba" target="_blank" rel="noopener">mapa</a></span></div>
+        <div class="store"><span class="name">Armazém da Família Pinheirinho</span><span class="dist">~2,1 km</span><span class="addr">Terminal Pinheirinho, mesmas regras de cadastro</span></div>
+        <div class="store"><span class="name">Feira livre noturna Novo Mundo</span><span class="dist">bairro</span><span class="addr">R. Rosalino Mazziotti, entre R. Eduardo Carlos Pereira e R. Dr. José Palú · <strong>terça, 16h–20h</strong> (lista de 2022, confirmar)</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Supermercados e hortifrutis de bairro</h3>
+        <div class="store"><span class="name">Mercado Feliz</span><span class="dist">~0,7 km</span><span class="addr">R. Pedro Zagonel, 1145</span></div>
+        <div class="store"><span class="name">MercaBom</span><span class="dist">~0,8 km</span><span class="addr">Novo Mundo</span></div>
+        <div class="store"><span class="name">Mercado Tokarski</span><span class="dist">~0,9 km</span><span class="addr">R. Francisco de Camargo Pinto, 237</span></div>
+        <div class="store"><span class="name">Sacolão Popular</span><span class="dist">~1,0 km</span><span class="addr">Novo Mundo (sentido Av. Brasília)</span></div>
+        <div class="store"><span class="name">Condor (Av. Brasília / Linha Verde)</span><span class="dist">~1,3 km</span><span class="addr">Bom para promoções pontuais de carne no app</span></div>
+        <div class="store"><span class="name">Sacolão Popular Curitibano</span><span class="dist">~1,5 km</span><span class="addr">Av. Brasília, 5547</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Dicas para economizar</h3>
+        <ul>
+          <li><strong>Verifiquem se se enquadram no Armazém da Família.</strong> O cadastro é online no site da Prefeitura e a economia média é de ~30% em arroz, feijão, leite, óleo e café.</li>
+          <li>Instalem os <strong>apps</strong> do Atacadão, Assaí, Muffato e Condor e olhem as ofertas na sexta à noite, antes da compra de sábado.</li>
+          <li>No atacarejo, o preço cai bastante a partir de <strong>X unidades</strong> (leite em caixa com 12, ovos em bandeja de 30).</li>
+          <li>Carne: comprem <strong>peito congelado em pacote</strong> e <strong>patinho/acém em peça para moer na hora</strong>. Às vezes sai mais barato que a moída pronta e é mais magra.</li>
+          <li>Hortifruti que <strong>dura a semana</strong>: batata, cenoura, cebola, repolho, chuchu, abóbora, maçã e laranja. Consumam primeiro o que estraga rápido: brócolis fresco, tomate maduro e banana.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. LISTA DE COMPRAS -->
+<section id="compras" class="page">
+  <div class="wrap">
+    <h2><span class="num">08</span> Lista de compras (para os dois)</h2>
+    <p class="lead">Marquem os itens no celular durante a compra. As marcações ficam salvas só neste aparelho. Os preços são <strong>estimativas aproximadas para out/2026</strong> e servem de referência: anotem os preços reais nas primeiras compras.</p>
+    <div class="list-head no-print">
+      <span class="muted" id="list-count"></span>
+      <button onclick="resetList()">Desmarcar tudo</button>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Mensal · atacarejo <small class="muted">(1º sábado do mês)</small></h3>
+        <ul class="checklist" data-list>
+          <li><input type="checkbox" id="m1"><label for="m1">Arroz tipo 1<span class="qty">1 pacote de 5 kg</span></label><span class="price">~R$ 25</span></li>
+          <li><input type="checkbox" id="m2"><label for="m2">Feijão carioca ou preto<span class="qty">3 kg</span></label><span class="price">~R$ 24</span></li>
+          <li><input type="checkbox" id="m3"><label for="m3">Leite semidesnatado UHT<span class="qty">2 caixas com 12 L</span></label><span class="price">~R$ 120</span></li>
+          <li><input type="checkbox" id="m4"><label for="m4">Café em pó<span class="qty">2 × 500 g</span></label><span class="price">~R$ 60</span></li>
+          <li><input type="checkbox" id="m5"><label for="m5">Óleo de soja ou canola<span class="qty">1 L</span></label><span class="price">~R$ 9</span></li>
+          <li><input type="checkbox" id="m6"><label for="m6">Aveia em flocos<span class="qty">500 g (opcional)</span></label><span class="price">~R$ 8</span></li>
+          <li><input type="checkbox" id="m7"><label for="m7">Extrato/molho de tomate sem açúcar<span class="qty">4 unidades</span></label><span class="price">~R$ 14</span></li>
+          <li><input type="checkbox" id="m8"><label for="m8">Temperos: sal, colorau, páprica, orégano, louro, noz-moscada<span class="qty">o que faltar</span></label><span class="price">~R$ 15</span></li>
+          <li><input type="checkbox" id="m9"><label for="m9">Brócolis congelado<span class="qty">4 pacotes de 1 kg</span></label><span class="price">~R$ 70</span></li>
+          <li><input type="checkbox" id="m10"><label for="m10">Sardinha em lata (para variar)<span class="qty">4 latas</span></label><span class="price">~R$ 24</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Semanal · proteínas e padaria <small class="muted">(sábado)</small></h3>
+        <ul class="checklist" data-list>
+          <li><input type="checkbox" id="s1"><label for="s1">Peito de frango (filé congelado)<span class="qty">2,5 kg</span></label><span class="price">~R$ 50</span></li>
+          <li><input type="checkbox" id="s2"><label for="s2">Carne moída patinho ou acém<span class="qty">1,5 kg</span></label><span class="price">~R$ 57</span></li>
+          <li><input type="checkbox" id="s3"><label for="s3">Ovos<span class="qty">1 bandeja de 30 + 1 dúzia</span></label><span class="price">~R$ 28</span></li>
+          <li><input type="checkbox" id="s4"><label for="s4">Pão de forma integral<span class="qty">2 pacotes (congelem 1)</span></label><span class="price">~R$ 16</span></li>
+          <li><input type="checkbox" id="s5"><label for="s5">Iogurte natural<span class="qty">1 pote grande ou 6 unidades</span></label><span class="price">~R$ 12</span></li>
+          <li><input type="checkbox" id="s6"><label for="s6">Queijo ralado (escondidinho)<span class="qty">50 g</span></label><span class="price">~R$ 5</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Semanal · hortifruti <small class="muted">(Sacolão da Família)</small></h3>
+        <ul class="checklist" data-list>
+          <li><input type="checkbox" id="h1"><label for="h1">Batata<span class="qty">3 kg</span></label><span class="price">~R$ 12</span></li>
+          <li><input type="checkbox" id="h2"><label for="h2">Tomate (metade maduro, metade firme)<span class="qty">1,5 kg</span></label><span class="price">~R$ 6</span></li>
+          <li><input type="checkbox" id="h3"><label for="h3">Brócolis fresco<span class="qty">2 maços</span></label><span class="price">~R$ 6</span></li>
+          <li><input type="checkbox" id="h4"><label for="h4">Cenoura<span class="qty">1 kg</span></label><span class="price">~R$ 4</span></li>
+          <li><input type="checkbox" id="h5"><label for="h5">Cebola<span class="qty">1 kg</span></label><span class="price">~R$ 4</span></li>
+          <li><input type="checkbox" id="h6"><label for="h6">Abobrinha e chuchu<span class="qty">1,5 kg</span></label><span class="price">~R$ 6</span></li>
+          <li><input type="checkbox" id="h7"><label for="h7">Repolho (salada que dura a semana)<span class="qty">½ a 1 unidade</span></label><span class="price">~R$ 4</span></li>
+          <li><input type="checkbox" id="h8"><label for="h8">Banana<span class="qty">1,5 kg</span></label><span class="price">~R$ 6</span></li>
+          <li><input type="checkbox" id="h9"><label for="h9">Maçã e laranja<span class="qty">3 kg</span></label><span class="price">~R$ 12</span></li>
+          <li><input type="checkbox" id="h10"><label for="h10">Alho, limão, cheiro-verde<span class="qty">o suficiente</span></label><span class="price">~R$ 6</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Gasto único (antes de começar)</h3>
+        <ul class="checklist" data-list>
+          <li><input type="checkbox" id="u1"><label for="u1">Potes de vidro para micro-ondas<span class="qty">10–12</span></label><span class="price">~R$ 120</span></li>
+          <li><input type="checkbox" id="u2"><label for="u2">Balança de cozinha digital<span class="qty">1</span></label><span class="price">~R$ 25</span></li>
+          <li><input type="checkbox" id="u3"><label for="u3">Bolsa térmica para marmita<span class="qty">1 (se não tiver)</span></label><span class="price">~R$ 40</span></li>
+          <li><input type="checkbox" id="u4"><label for="u4">Frigideira antiaderente<span class="qty">1 (se a atual gruda)</span></label><span class="price">~R$ 60</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. ORÇAMENTO -->
+<section id="orcamento">
+  <div class="wrap">
+    <h2><span class="num">09</span> Orçamento estimado</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Bloco</th><th class="num">Por compra</th><th class="num">Por mês</th></tr></thead>
+        <tbody>
+          <tr><td>Mensal (atacarejo)</td><td class="num">~R$ 370</td><td class="num">~R$ 370</td></tr>
+          <tr><td>Proteínas e padaria (semanal × 4)</td><td class="num">~R$ 168</td><td class="num">~R$ 670</td></tr>
+          <tr><td>Hortifruti (semanal × 4)</td><td class="num">~R$ 66</td><td class="num">~R$ 265</td></tr>
+          <tr><td><strong>Total para os dois</strong></td><td class="num"></td><td class="num"><strong>~R$ 1.300/mês</strong></td></tr>
+          <tr><td class="muted">Por pessoa, por dia (todas as refeições)</td><td class="num"></td><td class="num muted">~R$ 22</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <p>Para comparar: uma única marmita ou prato feito na rua costuma custar mais do que um dia inteiro de comida por pessoa neste plano. Com o <strong>Armazém da Família</strong> e as ofertas dos apps, dá para ficar perto de <strong>R$ 1.100/mês</strong>. Anotem o gasto real das 2 primeiras semanas para ter o número de vocês.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10. TROCAS -->
+<section id="trocas" class="page">
+  <div class="wrap">
+    <h2><span class="num">10</span> Tabela de trocas</h2>
+    <p class="lead">Faltou algum item ou cansaram de algo? Os alimentos da mesma linha se equivalem e podem ser trocados entre si.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Grupo</th><th>Equivalentes (porção dele · ela usa ~¾)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Proteína</strong></td><td>150 g de frango = 130 g de carne moída = 4 ovos = 1 lata de sardinha (drenada) + 1 ovo = 150 g de sobrecoxa sem pele = 120 g de pernil</td></tr>
+          <tr><td><strong>Carboidrato</strong></td><td>5 col. de arroz (120 g) = 1 batata grande (200 g) = 1 xícara de macarrão cozido = 150 g de mandioca cozida = 2 fatias de pão integral</td></tr>
+          <tr><td><strong>Feijão</strong></td><td>1 concha de feijão = 1 concha de lentilha = ½ xícara de grão-de-bico</td></tr>
+          <tr><td><strong>Café da manhã</strong></td><td>2 fatias de pão integral = 1 pão francês = 4 col. (sopa) de aveia em mingau com leite</td></tr>
+          <tr><td><strong>Lanche</strong></td><td>300 ml de leite = 1 iogurte natural + 1 col. de aveia = 2 ovos cozidos = pipoca de panela (3 col. de milho, 1 col. chá de óleo)</td></tr>
+          <tr><td><strong>Fruta</strong></td><td>1 banana = 1 maçã = 1 laranja = 1 fatia de mamão = 1 xícara de morango</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Evitem no dia a dia</h3>
+        <ul>
+          <li>Refrigerante, suco de caixinha e açúcar no café</li>
+          <li>Embutidos (salsicha, presunto, mortadela)</li>
+          <li>Biscoitos recheados e salgadinhos</li>
+          <li>Delivery durante a semana</li>
+          <li>Álcool: no máximo na refeição livre</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Hábitos que ajudam</h3>
+        <ul>
+          <li>1 copo de água antes de cada refeição</li>
+          <li>Comer devagar, sem tela, por ~20 min</li>
+          <li>Dormir 7h ou mais (sono ruim aumenta a fome)</li>
+          <li>Até a academia começar: caminhadas de 30 min, 3x por semana</li>
+          <li>Planejar a refeição livre em vez de improvisar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. ACOMPANHAMENTO -->
+<section id="acompanhamento" class="page">
+  <div class="wrap">
+    <h2><span class="num">11</span> Acompanhamento semanal</h2>
+    <p class="lead">Pesem-se 1x por semana, no mesmo dia, em jejum e depois de ir ao banheiro. Se o peso não mudar por 2–3 semanas seguidas, cortem ~150 kcal (por exemplo, metade do carboidrato do jantar). No celular os valores ficam salvos neste aparelho. Na versão impressa, preencham à mão.</p>
+    <div class="table-wrap tracker">
+      <table>
+        <thead><tr><th>Sem.</th><th>Data</th><th>Peso ele</th><th>Cintura ele</th><th>Peso ela</th><th>Cintura ela</th><th>Gasto mercado</th></tr></thead>
+        <tbody id="tracker-body"></tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <p><strong>Recomendado:</strong> marquem uma consulta com nutricionista para personalizar o plano e peçam exames básicos (glicemia, colesterol, tireoide). Há atendimento gratuito pela <strong>UBS do bairro (SUS)</strong> e preços baixos nas <strong>clínicas-escola de nutrição</strong> das universidades de Curitiba. Este documento é um guia geral e não substitui o acompanhamento profissional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12. PREÇOS REAIS -->
+<section id="precos" class="page">
+  <div class="wrap">
+    <h2><span class="num">12</span> Compras e preços reais</h2>
+    <p class="lead">Dados das notas fiscais (NFC-e) de cada compra. Para comparar, as tags mostram quanto cada item ficou acima ou abaixo do preço de referência do plano.</p>
+    <div class="grid g3" id="precos-resumo"></div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Gasto por categoria</h3>
+        <div id="precos-categorias"></div>
+      </div>
+      <div class="card">
+        <h3>Dentro e fora do plano</h3>
+        <div id="precos-plano"></div>
+        <p class="muted" style="margin:10px 0 0;font-size:.85rem"><span class="tag ok">plano</span> previsto no cardápio · <span class="tag">troca</span> serve como substituto · <span class="tag warn">evitar</span> fora do plano</p>
+      </div>
+    </div>
+    <h3>Histórico de preço por item</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Item</th><th class="num">Último</th><th class="num">Menor</th><th>Onde foi mais barato</th><th class="num">Referência</th></tr></thead>
+        <tbody id="precos-historico"></tbody>
+      </table>
+    </div>
+    <h3>Notas registradas</h3>
+    <div id="precos-notas"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Fontes e observações</strong></p>
+    <ol>
+      <li>Endereços e distâncias: OpenStreetMap (out/2026). As distâncias são em linha reta. Confirmem horários no Google Maps antes de ir.</li>
+      <li>Sacolão da Família, preço único de R$ 3,99/kg e sem cadastro: <a href="https://www.curitiba.pr.gov.br/noticias/sacolao-da-familia-movel-esta-em-quatro-pontos-de-curitiba-e-amplia-oferta-de-produtos/85182">Prefeitura de Curitiba</a>, <a href="https://www.tribunapr.com.br/noticias/curitiba-regiao/curitiba-amplia-sacolao-familia-setor-privado/">Tribuna PR</a></li>
+      <li>Armazém da Família, limite de renda de 2026 e horários: <a href="https://www.curitiba.pr.gov.br/noticias/limite-da-renda-para-comprar-nos-armazens-da-familia-de-curitiba-e-atualizado/81242">Prefeitura de Curitiba</a></li>
+      <li>Feira livre noturna Novo Mundo: <a href="https://mid.curitiba.pr.gov.br/2022/00343657.pdf">lista de feiras da Prefeitura (2022)</a></li>
+      <li>Superdia no Novo Mundo: <a href="https://www.bemparana.com.br/noticias/economia/mais-supermercados-em-curitiba-agora-e-a-vez-da-zona-norte/">Bem Paraná</a></li>
+      <li>Metas calculadas pela equação de Mifflin-St Jeor (fator sedentário 1,2) com déficit de ~400–500 kcal. Os preços são estimativas e variam semana a semana.</li>
+    </ol>
+  </div>
+</footer>
+
+<script src="compras.js"></script>
+<script>
+  (function () {
+    var compras = window.COMPRAS || [];
+    var ref = window.REFERENCIA || {};
+    var budget = window.ORCAMENTO_MENSAL || 1300;
+    if (!compras.length) return;
+
+    var brl = function (v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+    var num = function (v) { return v.toLocaleString('pt-BR', { maximumFractionDigits: 3 }); };
+    var dataBR = function (iso) { var p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; };
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var sum = function (arr, f) { return arr.reduce(function (a, x) { return a + f(x); }, 0); };
+    var planoTag = { sim: '<span class="tag ok">plano</span>', troca: '<span class="tag">troca</span>', evitar: '<span class="tag warn">evitar</span>' };
+
+    function diffTag(it) {
+      var r = ref[it.item];
+      if (!r || r.un !== it.un) return '';
+      var d = (it.unit - r.preco) / r.preco;
+      if (Math.abs(d) < 0.03) return ' <span class="diff-ok">≈ ref.</span>';
+      return d > 0 ? ' <span class="diff-up">+' + Math.round(d * 100) + '%</span>' : ' <span class="diff-ok">' + Math.round(d * 100) + '%</span>';
+    }
+    function bars(rows, max) {
+      return rows.map(function (r) {
+        return '<div class="bar-row"><span>' + esc(r[0]) + '</span><div class="bar"><i style="width:' + Math.max(2, r[1] / max * 100).toFixed(1) + '%"></i></div><span class="val">' + brl(r[1]) + '</span></div>';
+      }).join('');
+    }
+
+    // Resumo do mês mais recente
+    var ultimoMes = compras.map(function (c) { return c.data.slice(0, 7); }).sort().pop();
+    var doMes = compras.filter(function (c) { return c.data.slice(0, 7) === ultimoMes; });
+    var gastoMes = sum(doMes, function (c) { return c.total; });
+    var itensTodos = [];
+    compras.forEach(function (c) { c.itens.forEach(function (it) { itensTodos.push({ c: c, it: it }); }); });
+    var evitar = sum(itensTodos.filter(function (x) { return x.c.data.slice(0, 7) === ultimoMes && x.it.plano === 'evitar'; }), function (x) { return x.it.total; });
+    var mesNome = new Date(ultimoMes + '-15').toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+
+    document.getElementById('precos-resumo').innerHTML =
+      '<div class="card"><div class="stat"><div class="v">' + brl(gastoMes) + '</div><div class="l">gasto em ' + mesNome + ' (' + doMes.length + ' nota' + (doMes.length > 1 ? 's' : '') + ')</div></div>' +
+        '<div class="bar budget" style="margin-top:10px"><i style="width:' + Math.min(100, gastoMes / budget * 100).toFixed(1) + '%"></i></div>' +
+        '<small>' + Math.round(gastoMes / budget * 100) + '% do orçamento de ' + brl(budget) + '</small></div>' +
+      '<div class="card"><div class="stat"><div class="v">' + brl(evitar) + '</div><div class="l">em itens a evitar no mês</div></div></div>' +
+      '<div class="card"><div class="stat"><div class="v">' + compras.length + '</div><div class="l">notas registradas · ' + itensTodos.length + ' itens</div></div></div>';
+
+    // Por categoria (todas as notas do mês)
+    var cats = {};
+    itensTodos.filter(function (x) { return x.c.data.slice(0, 7) === ultimoMes; }).forEach(function (x) { cats[x.it.cat] = (cats[x.it.cat] || 0) + x.it.total; });
+    var catRows = Object.keys(cats).map(function (k) { return [k, cats[k]]; }).sort(function (a, b) { return b[1] - a[1]; });
+    document.getElementById('precos-categorias').innerHTML = bars(catRows, catRows[0][1]);
+
+    var pl = { 'No plano': 0, 'Trocas': 0, 'Evitar': 0 };
+    itensTodos.filter(function (x) { return x.c.data.slice(0, 7) === ultimoMes; }).forEach(function (x) {
+      pl[x.it.plano === 'sim' ? 'No plano' : x.it.plano === 'troca' ? 'Trocas' : 'Evitar'] += x.it.total;
+    });
+    var plRows = Object.keys(pl).map(function (k) { return [k, pl[k]]; });
+    document.getElementById('precos-plano').innerHTML = bars(plRows, Math.max.apply(null, plRows.map(function (r) { return r[1]; })));
+
+    // Histórico por item
+    var porItem = {};
+    itensTodos.forEach(function (x) { (porItem[x.it.item] = porItem[x.it.item] || []).push(x); });
+    var hist = Object.keys(porItem).sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); }).map(function (nome) {
+      var lst = porItem[nome].slice().sort(function (a, b) { return a.c.data < b.c.data ? -1 : 1; });
+      var last = lst[lst.length - 1];
+      var min = lst.reduce(function (m, x) { return x.it.unit < m.it.unit ? x : m; }, lst[0]);
+      var u = last.it.un === 'kg' ? '/kg' : '/un';
+      var r = ref[nome];
+      return '<tr><td>' + esc(nome) + (lst.length > 1 ? ' <small class="muted">(' + lst.length + 'x)</small>' : '') + '</td>' +
+        '<td class="num">' + brl(last.it.unit) + u + diffTag(last.it) + '</td>' +
+        '<td class="num">' + brl(min.it.unit) + u + '</td>' +
+        '<td>' + esc(min.c.mercado) + ' <small class="muted">' + dataBR(min.c.data) + '</small></td>' +
+        '<td class="num">' + (r ? brl(r.preco) + '/' + r.un + '<br><small class="muted">' + esc(r.fonte) + '</small>' : '<span class="muted">–</span>') + '</td></tr>';
+    }).join('');
+    document.getElementById('precos-historico').innerHTML = hist;
+
+    // Notas
+    document.getElementById('precos-notas').innerHTML = compras.slice().reverse().map(function (c, i) {
+      var rows = c.itens.map(function (it) {
+        return '<tr><td>' + esc(it.item) + '<br><small class="muted">' + esc(it.desc) + '</small></td>' +
+          '<td>' + planoTag[it.plano] + '</td>' +
+          '<td class="num">' + num(it.qtd) + ' ' + it.un + '</td>' +
+          '<td class="num">' + brl(it.unit) + diffTag(it) + '</td>' +
+          '<td class="num">' + brl(it.total) + '</td></tr>';
+      }).join('');
+      return '<details class="recipe"' + (i === 0 ? ' open' : '') + '><summary>' + dataBR(c.data) + ' · ' + esc(c.mercado) +
+        ' <span class="meta">' + brl(c.total) + '</span></summary><div class="body">' +
+        '<p class="muted" style="font-size:.85rem">' + esc(c.endereco) + ', ' + esc(c.bairro) + ' · ' + c.hora + ' · ' + esc(c.pagamento) + ' · NFC-e ' + esc(c.nfce) + '</p>' +
+        '<div class="table-wrap"><table><thead><tr><th>Item</th><th></th><th class="num">Qtd</th><th class="num">Preço</th><th class="num">Total</th></tr></thead><tbody>' + rows +
+        '<tr><td colspan="4"><strong>Total</strong></td><td class="num"><strong>' + brl(c.total) + '</strong></td></tr></tbody></table></div></div></details>';
+    }).join('');
+  })();
+
+  (function () {
+    var store = {
+      get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+      set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+    };
+
+    // Lista de compras
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('[data-list] input[type=checkbox]'));
+    function updateCount() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      var el = document.getElementById('list-count');
+      if (el) el.textContent = done + ' de ' + boxes.length + ' itens marcados';
+    }
+    boxes.forEach(function (b) {
+      b.checked = store.get('lista:' + b.id) === '1';
+      b.addEventListener('change', function () { store.set('lista:' + b.id, b.checked ? '1' : '0'); updateCount(); });
+    });
+    window.resetList = function () {
+      boxes.forEach(function (b) { b.checked = false; store.set('lista:' + b.id, '0'); });
+      updateCount();
+    };
+    updateCount();
+
+    // Acompanhamento
+    var body = document.getElementById('tracker-body');
+    var cols = ['data', 'pesoEle', 'cinturaEle', 'pesoEla', 'cinturaEla', 'gasto'];
+    for (var i = 1; i <= 12; i++) {
+      var tr = document.createElement('tr');
+      var th = document.createElement('td');
+      th.textContent = i;
+      th.style.fontWeight = '700';
+      tr.appendChild(th);
+      cols.forEach(function (c) {
+        var td = document.createElement('td');
+        var input = document.createElement('input');
+        var key = 'track:' + i + ':' + c;
+        input.type = 'text';
+        input.inputMode = c === 'data' ? 'text' : 'decimal';
+        input.setAttribute('aria-label', c + ' semana ' + i);
+        input.value = store.get(key) || '';
+        input.addEventListener('input', function () { store.set(key, input.value); });
+        td.appendChild(input);
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    }
+
+    // Ao imprimir, abrir todas as receitas
+    window.addEventListener('beforeprint', function () {
+      document.querySelectorAll('details.recipe').forEach(function (d) { d.setAttribute('open', ''); });
+    });
+  })();
+</script>
+</body>
+</html>
