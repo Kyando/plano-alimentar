@@ -872,6 +872,7 @@
         ' <span class="meta">' + brl(c.total) + '</span></summary><div class="body">' +
         '<p class="muted" style="font-size:.85rem">' + esc(c.endereco) + ', ' + esc(c.bairro) + ' · ' + c.hora + ' · ' + esc(c.pagamento) + ' · NFC-e ' + esc(c.nfce) + '</p>' +
         '<div class="table-wrap"><table><thead><tr><th>Item</th><th></th><th class="num">Qtd</th><th class="num">Preço</th><th class="num">Total</th></tr></thead><tbody>' + rows +
+        (c.desconto ? '<tr><td colspan="4">Desconto</td><td class="num">−' + brl(c.desconto) + '</td></tr>' : '') +
         '<tr><td colspan="4"><strong>Total</strong></td><td class="num"><strong>' + brl(c.total) + '</strong></td></tr></tbody></table></div></div></details>';
     }).join('');
   })();
